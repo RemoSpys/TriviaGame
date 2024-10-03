@@ -19,27 +19,28 @@ let playerCount = 1; //mitu mängijat on
 let playerScores = [0, 0, 0]; //skoorid
 let usedQuestions = []; //mis küsimused on olnud
 
-document.getElementById('playerCount').addEventListener('change', displayPlayerNameInputs);
-document.getElementById('startGame').addEventListener('click', startGame);
-document.getElementById('restartGame').addEventListener('click', restartGame);
+// Jälgib mängijate arvu muutust
+document.getElementById('playerCount').addEventListener('change', displayPlayerNameInputs); 
+document.getElementById('startGame').addEventListener('click', startGame); // Jälgib kui vajutada start nuppu 
+document.getElementById('restartGame').addEventListener('click', restartGame); // Jälgib kui vajutada restart nuppu peale mängimist
 
 function displayPlayerNameInputs() {
-    const count = parseInt(document.getElementById('playerCount').value);
-    const playerNamesDiv = document.getElementById('playerNames');
-    playerNamesDiv.innerHTML = `
+    const count = parseInt(document.getElementById('playerCount').value); // Mitu mängijat mängib
+    const playerNamesDiv = document.getElementById('playerNames'); // Kuvab mängijate nimed
+    playerNamesDiv.innerHTML = `   
         <label class="block text-xl">Player 1 Name:</label>
         <input type="text" id="playerName1" class="border-2 rounded p-2 text-black w-full max-w-xs mx-auto mb-4" placeholder="Enter Player 1 Name">
     `;
-
+// Teeb mängijate nimede jaoks kastid
     for (let i = 2; i <= count; i++) {
         playerNamesDiv.innerHTML += `
-            <label class="block text-xl">Player ${i} Name:</label>
+            <label class="block text-xl">Player ${i} Name:</label>n 
             <input type="text" id="playerName${i}" class="border-2 rounded p-2 text-black w-full max-w-xs mx-auto mb-4" placeholder="Enter Player ${i} Name">
         `;
     }
 }
 
-function startGame() {
+function startGame() { // Kuvab mitu mängijat mängib ja kuvab nende nimed
     playerCount = parseInt(document.getElementById('playerCount').value);
     players = [];
     playerNames = [];
@@ -50,20 +51,20 @@ function startGame() {
         playerNames.push(playerName);
     }
 
-    usedQuestions = [];
-    playerScores = [0, 0, 0];
-    document.getElementById('playerSetup').classList.add('hidden');
-    document.getElementById('gameArea').classList.remove('hidden');
-    currentPlayer = 0;
-    document.getElementById('playerTurn').textContent = `${playerNames[currentPlayer]}'s Turn`;
-    loadQuestion();
+    usedQuestions = []; // Lisab  mis küsimus on küsitud
+    playerScores = [0, 0, 0]; // Mängijate skoorid
+    document.getElementById('playerSetup').classList.add('hidden');  
+    document.getElementById('gameArea').classList.remove('hidden'); // Stiil
+    currentPlayer = 0; // Näitab kelle kord on
+    document.getElementById('playerTurn').textContent = `${playerNames[currentPlayer]}'s Turn`; // Näitab nimeliselt kelle kord on
+    loadQuestion(); 
 }
 
-function loadQuestion() {
-    let questionSet = shuffleQuestions().filter(q => !usedQuestions.includes(q));
-    let playerQuestion = questionSet[0];
-    usedQuestions.push(playerQuestion);
-    displayQuestion(playerQuestion);
+function loadQuestion() {  // Funktsioon
+    let questionSet = shuffleQuestions().filter(q => !usedQuestions.includes(q)); // Segab küsimused ja filteerib välja kasutatud kpsimused
+    let playerQuestion = questionSet[0]; // Esitab 1. küsimuse
+    usedQuestions.push(playerQuestion); // Pushib usedQuestionsisse selle küsimuse
+    displayQuestion(playerQuestion); // Siis Kuvab küsimuse 
 }
 
 function displayQuestion(questionObj) {
