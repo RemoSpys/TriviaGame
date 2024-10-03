@@ -67,31 +67,31 @@ function loadQuestion() {  // Funktsioon
     displayQuestion(playerQuestion); // Siis Kuvab küsimuse 
 }
 
-function displayQuestion(questionObj) {
-    document.getElementById('questionArea').textContent = questionObj.question;
+function displayQuestion(questionObj) { // Funktsioon
+    document.getElementById('questionArea').textContent = questionObj.question; // kuvab eelnevalt genereeritud küsimuse õigesse kohta
     document.getElementById('answerOptions').innerHTML = '';
     questionObj.options.forEach((option, index) => {
-        const btn = document.createElement('button');
-        btn.classList.add('bg-green-500', 'text-white', 'p-2', 'm-2', 'rounded', 'btn-option');
-        btn.textContent = option;
-        btn.addEventListener('click', () => handleAnswer(index, questionObj.answer));
-        document.getElementById('answerOptions').appendChild(btn);
+        const btn = document.createElement('button'); // teeb vastuse variantidest nupud
+        btn.classList.add('bg-green-500', 'text-white', 'p-2', 'm-2', 'rounded', 'btn-option'); // Stiil
+        btn.textContent = option;// vastusevariant
+        btn.addEventListener('click', () => handleAnswer(index, questionObj.answer)); // jälgib, mida vastaja klikkib nende seast
+        document.getElementById('answerOptions').appendChild(btn); // Vaatab, mis tekst nupus on (et kas oli õige valik)
     });
 }
 
-function handleAnswer(selected, correct) {
-    document.querySelectorAll('.btn-option').forEach((btn, index) => {
+function handleAnswer(selected, correct) { // Funktsioon, hakkab kontrollima, kas oli õige vastus ja kuidas ta skoori hakkab arvutama
+    document.querySelectorAll('.btn-option').forEach((btn, index) => {//
         if (index === correct) {
-            btn.classList.add('correct');
+            btn.classList.add('correct');// kui on õige siis on roheline värv
         } else if (index === selected) {
-            btn.classList.add('selected-incorrect');
+            btn.classList.add('selected-incorrect');// kui on vale valitud siis sinine värv
         } else {
-            btn.classList.add('incorrect');
+            btn.classList.add('incorrect');// ülejäänud valed vastused punane
         }
-        btn.disabled = true; // Disable buttons after selection
+        btn.disabled = true; // Teeb, et pärast valikut ei saa rohkem vastuste peale klikata
     });
 
-    if (selected === correct) {
+    if (selected === correct) { // kui vastab õigesti saab +1 punkti
         playerScores[currentPlayer]++;
     }
     currentPlayer++;
@@ -99,13 +99,13 @@ function handleAnswer(selected, correct) {
         currentPlayer = 0;
     }
     setTimeout(() => {
-        if (usedQuestions.length >= playerCount * 3) {
+        if (usedQuestions.length >= playerCount * 3) { //kui kasutatud küsimuste number on suurem kui vastajate arv*3 siis näitab lõpptulemust
             showScoreboard();
         } else {
-            document.getElementById('playerTurn').textContent = `${playerNames[currentPlayer]}'s Turn`;
-            loadQuestion();
+            document.getElementById('playerTurn').textContent = `${playerNames[currentPlayer]}'s Turn`; 
+            loadQuestion(); //muul juhul tuleb järgmine küsimus ja võtab järgmise vastaja nime
         }
-    }, 2000); // 2 second delay for next question
+    }, 2000); // pärast vastamist ootab 2 sekundit ja siis on järgmise mängija kord
 }
 
 function showScoreboard() {
