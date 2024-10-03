@@ -1,3 +1,4 @@
+//küsimused ja vastused
 const questions = [
     { category: "General", question: "What is the capital of France?", options: ["Paris", "London", "Berlin", "Madrid"], answer: 0 },
     { category: "General", question: "Who wrote 'Hamlet'?", options: ["Shakespeare", "Tolstoy", "Hemingway", "Fitzgerald"], answer: 0 },
@@ -11,12 +12,12 @@ const questions = [
     { category: "General", question: "What is the largest ocean on Earth?", options: ["Atlantic", "Indian", "Pacific", "Arctic"], answer: 2 }
 ];
 
-let players = [];
-let playerNames = [];
-let currentPlayer = 0;
-let playerCount = 1;
-let playerScores = [0, 0, 0];
-let usedQuestions = [];
+let players = []; //mängijad
+let playerNames = []; //mängijate nimed
+let currentPlayer = 0; //kes mängib
+let playerCount = 1; //mitu mängijat on
+let playerScores = [0, 0, 0]; //skoorid
+let usedQuestions = []; //mis küsimused on olnud
 
 document.getElementById('playerCount').addEventListener('change', displayPlayerNameInputs);
 document.getElementById('startGame').addEventListener('click', startGame);
