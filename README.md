@@ -8,4 +8,4 @@ Seitse kategooriat: Animals, Car Brands, Cities, Geography, History, Sports, Ast
 Saab lasta pakkuda küsimused ka kõigist kategooriatest.
 Valida saab ka mitu küsimust esitatakse kas 5, 10 või 15.
 
-[https://triviagame.tak23tammela.itmajakas.ee/](Rakenduse live link)
+Zone link: [Rakenduse link](https://triviagame.tak23tammela.itmajakas.ee/)
